@@ -2,9 +2,13 @@ import { roundTo } from "./utils.ts";
 
 export class Fraction {
   constructor(
-    private numerator: number,
-    private denominator: number,
-  ) {}
+  private numerator: number,
+  private denominator: number,
+) {
+  if (denominator === 0) {
+    throw new Error("denominator must not be 0");
+  }
+}
 
   public add(other: Fraction) {
     const newNumerator =
@@ -32,6 +36,20 @@ export class Fraction {
   public divide(other: Fraction) {
     const newNumerator = this.numerator * other.denominator;
     const newDenominator = this.denominator * other.numerator;
+    this.numerator = newNumerator;
+    this.denominator = newDenominator;
+  }
+
+  public potentiate(exponent: number) {
+    const newNumerator = this.numerator ** exponent;
+    const newDenominator = this.denominator ** exponent;
+    this.numerator = newNumerator;
+    this.denominator = newDenominator;
+  }
+
+  public squareRoot() {
+    const newNumerator = Math.sqrt(this.numerator);
+    const newDenominator = Math.sqrt(this.denominator);
     this.numerator = newNumerator;
     this.denominator = newDenominator;
   }
