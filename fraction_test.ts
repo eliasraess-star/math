@@ -104,3 +104,10 @@ Deno.test("constructor throws on denominator 0", () => {
 Deno.test("parse throws on denominator 0", () => {
   assertThrows(() => Fraction.parse("3/0"), Error);
 });
+Deno.test("parse throws on invalid syntax", () => {
+  assertThrows(() => Fraction.parse("3"), Error);
+});
+
+Deno.test("parse throws on non-numeric input", () => {
+  assertThrows(() => Fraction.parse("a/b"), Error);
+});

@@ -31,3 +31,7 @@ Deno.test("diagonal of rectangle (0,0)-(3,4) is 5", () => {
   const rect = new Rectangle(new Point2D(0, 0), new Point2D(3, 4));
   assertEquals(rect.diagonal(), 5);
 });
+Deno.test("circumference of circle with radius 5 is about 31.42", () => {
+  const circle = new Circle(new Point2D(0, 0), 5);
+  assertAlmostEquals(circle.circumference(), 31.42, 0.01);
+});
