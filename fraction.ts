@@ -1,4 +1,5 @@
 import { roundTo } from "./utils.ts";
+import { gcd } from "./gcd.ts";
 
 export class Fraction {
   constructor(
@@ -52,6 +53,14 @@ export class Fraction {
     const newDenominator = Math.sqrt(this.denominator);
     this.numerator = newNumerator;
     this.denominator = newDenominator;
+  }
+
+  public cancel() {
+    const a = new gcd(this.numerator, 0);
+    const b = new gcd(this.denominator, 0);
+    const divisor = a.gcdEuclid(b);
+    this.numerator = this.numerator / divisor;
+    this.denominator = this.denominator / divisor;
   }
 
   public toFloat(precision: number): number {

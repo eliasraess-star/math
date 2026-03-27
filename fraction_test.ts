@@ -111,3 +111,21 @@ Deno.test("parse throws on invalid syntax", () => {
 Deno.test("parse throws on non-numeric input", () => {
   assertThrows(() => Fraction.parse("a/b"), Error);
 });
+
+Deno.test("cancel 2/4 gives 1/2", () => {
+  const fraction = new Fraction(2, 4);
+  fraction.cancel();
+  assertEquals(fraction.toString(), "1/2");
+});
+
+Deno.test("cancel 6/9 gives 2/3", () => {
+  const fraction = new Fraction(6, 9);
+  fraction.cancel();
+  assertEquals(fraction.toString(), "2/3");
+});
+
+Deno.test("cancel 1/2 stays 1/2 (already cancelled)", () => {
+  const fraction = new Fraction(1, 2);
+  fraction.cancel();
+  assertEquals(fraction.toString(), "1/2");
+});
