@@ -129,3 +129,31 @@ Deno.test("cancel 1/2 stays 1/2 (already cancelled)", () => {
   fraction.cancel();
   assertEquals(fraction.toString(), "1/2");
 });
+
+Deno.test("constructor auto-cancels 6/9 to 2/3", () => {
+  assertEquals(new Fraction(6, 9).toString(), "2/3");
+});
+
+Deno.test("add 1/3 + 2/6 auto-cancels to 2/3", () => {
+  const left = new Fraction(1, 3);
+  left.add(new Fraction(2, 6));
+  assertEquals(left.toString(), "2/3");
+});
+
+Deno.test("subtract 5/3 - 1/3 auto-cancels to 4/3", () => {
+  const left = new Fraction(5, 3);
+  left.subtract(new Fraction(1, 3));
+  assertEquals(left.toString(), "4/3");
+});
+
+Deno.test("multiply 2/3 * 3/4 auto-cancels to 1/2", () => {
+  const left = new Fraction(2, 3);
+  left.multiply(new Fraction(3, 4));
+  assertEquals(left.toString(), "1/2");
+});
+
+Deno.test("divide 1/2 / 1/4 auto-cancels to 2/1", () => {
+  const left = new Fraction(1, 2);
+  left.divide(new Fraction(1, 4));
+  assertEquals(left.toString(), "2/1");
+});

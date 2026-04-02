@@ -1,32 +1,28 @@
 import { assertEquals } from "@std/assert";
 import { gcd } from "./gcd.ts";
 
-Deno.test("gcdBruteForce of 1 and 1 is 1", () => {
-    const a = new gcd(1, 0);
-    const b = new gcd(1, 0);
-    assertEquals(a.gcdBruteForce(b), 1);
+const gcdTests = [
+    { a: 1, b: 1, gcd: 1 },
+    { a: 1, b: 2, gcd: 1 },
+    { a: 2, b: 2, gcd: 2 },
+    { a: 3, b: 4, gcd: 1 },
+    { a: 6, b: 9, gcd: 3 },
+    { a: 12, b: 8, gcd: 4 },
+    { a: 81, b: 36, gcd: 9 },
+];
+
+Deno.test("gcdBruteForce table-driven", () => {
+    for (const { a, b, gcd: expected } of gcdTests) {
+        const x = new gcd(a, 0);
+        const y = new gcd(b, 0);
+        assertEquals(x.gcdBruteForce(y), expected);
+    }
 });
 
-Deno.test("gcdBruteForce of 12 and 8 is 4", () => {
-    const a = new gcd(12, 0);
-    const b = new gcd(8, 0);
-    assertEquals(a.gcdBruteForce(b), 4);
-});
-
-Deno.test("gcdEuclid of 1 and 1 is 1", () => {
-    const a = new gcd(1, 0);
-    const b = new gcd(1, 0);
-    assertEquals(a.gcdEuclid(b), 1);
-});
-
-Deno.test("gcdEuclid of 12 and 8 is 4", () => {
-    const a = new gcd(12, 0);
-    const b = new gcd(8, 0);
-    assertEquals(a.gcdEuclid(b), 4);
-});
-
-Deno.test("gcdEuclid of 6 and 9 is 3", () => {
-    const a = new gcd(6, 0);
-    const b = new gcd(9, 0);
-    assertEquals(a.gcdEuclid(b), 3);
+Deno.test("gcdEuclid table-driven", () => {
+    for (const { a, b, gcd: expected } of gcdTests) {
+        const x = new gcd(a, 0);
+        const y = new gcd(b, 0);
+        assertEquals(x.gcdEuclid(y), expected);
+    }
 });
